@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rumah Puisi</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%82%3C/text%3E%3C/svg%3E">
 <style>
 :root{--outer:#dacbb8;--paper:#f8f3ea;--panel:#fdf8f0;--ink:#5b4333;--mute:#7d6857;--line:#eadcc7;--edge:#e0d0b9;--acc:#6b5141;--acc-ink:#fbf3e8;--ring:#a07c50;--pink:#f3e8d6;--pink-ink:#8a6a43;--leaf:#ece0ca;--shadow:0 2px 10px rgba(107,81,65,.10);color-scheme:light}
 *{box-sizing:border-box}
@@ -45,13 +46,14 @@ ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .rbar button{padding:7px 16px}
 .rscroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch}
 .rbody{max-width:36rem;margin:0 auto;padding:56px 24px 56px}
+.rtag[hidden]{display:none}
 .rtag{display:block;color:var(--pink-ink);font-weight:700;letter-spacing:.14em;font-size:.78rem;text-transform:uppercase}
 .rtitle{font:600 clamp(1.9rem,6vw,2.6rem)/1.25 Lora,Georgia,serif;margin:10px 0 6px}
 .rby{color:var(--mute)}
 .orn{width:56px;height:2px;border-radius:2px;background:var(--ring);margin:26px 0 36px}
 .poemtxt{font-family:Lora,Georgia,serif;font-size:var(--ps);line-height:2;color:var(--ink)}
 .stanza{margin:0 0 1.9em}
-.ln{display:block;white-space:pre-wrap;padding-left:1.6em;text-indent:-1.6em}
+.ln{display:block;white-space:pre-wrap;padding-left:1.6em;text-indent:-1.6em;overflow-wrap:anywhere}
 .rnav{display:flex;justify-content:space-between;gap:12px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line)}
 .rnav button{display:flex;flex-direction:column;gap:2px;max-width:48%;border-radius:18px;padding:10px 18px;text-align:left}
 .rnav button:last-child{text-align:right;align-items:flex-end;margin-left:auto}
@@ -62,14 +64,14 @@ ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="wrap">
   <h1><svg class="bloom" viewBox="0 0 48 48" aria-hidden="true"><g stroke="#9c5a30" stroke-width="1.2" stroke-linecap="round"><g transform="rotate(-34 24 44)"><path d="M24 5C36 15 39 27 24 44 9 27 12 15 24 5Z" fill="#d4623a"/><path d="M24 44V14" fill="none"/></g><g transform="rotate(34 24 44)"><path d="M24 5C36 15 39 27 24 44 9 27 12 15 24 5Z" fill="#eab543"/><path d="M24 44V14" fill="none"/></g><g><path d="M24 4C36 14 40 27 24 45 8 27 12 14 24 4Z" fill="#e48a2f"/><path d="M24 45V13" fill="none"/></g></g></svg>Rumah Puisi</h1>
   <p class="sub">Kumpulan puisi untuk dibaca pelan-pelan, seperti menikmati secangkir teh hangat di sore musim gugur.</p>
-  <button class="hero" id="hero" hidden>
+  <div class="hero" id="hero" role="button" tabindex="0" hidden>
     <small>Puisi hari ini</small>
     <h2 id="hT"></h2><div id="hA" class="m"></div>
     <pre id="hX"></pre>
-  </button>
+  </div>
   <input id="q" type="search" placeholder="Cari judul, penyair, atau isi puisi" aria-label="Cari puisi">
   <div class="chips" id="chips"></div>
   <ul id="list"></ul>
@@ -113,8 +115,13 @@ function tidy(t){
   if(min===Infinity)min=0;
   return lines.map(function(l){return l.slice(Math.min(min,l.match(/^ */)[0].length)).replace(/\s+$/,"")}).join("\n").replace(/^\n+|\n+$/g,"");
 }
-var raw=Array.isArray(window.PUISI)?window.PUISI:[];
-var poems=raw.filter(function(p){return p&&typeof p.judul==="string"&&typeof p.isi==="string"&&p.judul.trim()&&p.isi.trim()})
+var loadedOk=Array.isArray(window.PUISI);
+var raw=loadedOk?window.PUISI:[];
+var poems=raw.filter(function(p,i){
+  var ok=p&&typeof p.judul==="string"&&typeof p.isi==="string"&&p.judul.trim()&&p.isi.trim();
+  if(!ok&&window.console)console.warn("puisi.js: puisi ke-"+(i+1)+" dilewati karena judul atau isi tidak valid.");
+  return ok;
+})
   .map(function(p,i){return {id:i,title:p.judul.trim(),author:String(p.penyair||"").trim(),category:String(p.kategori||"").trim(),text:tidy(p.isi)}});
 
 var cat="Semua",shown=[],list=[],idx=-1,opener=null,SIZES=[1.05,1.15,1.25,1.4,1.6,1.8],size=2;
@@ -123,12 +130,13 @@ try{var sv=parseInt(localStorage.getItem("rp_size"),10);if(sv>=0&&sv<SIZES.lengt
 function hero(){
   var h=$("hero");
   if(!poems.length){h.hidden=true;return}
-  var i=Math.floor(Date.now()/864e5)%poems.length,p=poems[i];
+  var n=new Date(),i=Math.floor(Date.UTC(n.getFullYear(),n.getMonth(),n.getDate())/864e5)%poems.length,p=poems[i];
   $("hT").textContent=p.title;
   $("hA").textContent=p.author||"Anonim";
   $("hX").textContent=p.text.split("\n").filter(function(l){return l.trim()}).slice(0,4).join("\n");
   h.hidden=false;
   h.onclick=function(){openReader(poems,i,h)};
+  h.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openReader(poems,i,h)}};
 }
 function render(){
   var q=$("q").value.trim().toLowerCase(),cats=["Semua"];
@@ -142,7 +150,7 @@ function render(){
   $("list").innerHTML=shown.map(function(p,i){
     return '<li><button class="row" data-i="'+i+'"><span class="t">'+esc(p.title)+'</span><span class="m">'+esc(p.author||"Anonim")+(p.category?", "+esc(p.category):"")+'</span></button></li>';
   }).join("");
-  $("msg").textContent=shown.length?"":(poems.length?"Tidak ada puisi yang cocok dengan pencarian.":"Belum ada puisi.");
+  $("msg").textContent=shown.length?"":(poems.length?"Tidak ada puisi yang cocok dengan pencarian.":(loadedOk?"Belum ada puisi.":"Puisi gagal dimuat. Pastikan berkas puisi.js ada di folder yang sama dan penulisannya benar."));
 }
 
 function applySize(){
@@ -166,10 +174,13 @@ function fill(){
 }
 function openReader(l,i,from){
   list=l;idx=i;opener=from||null;fill();applySize();
-  $("reader").classList.add("open");document.body.style.overflow="hidden";$("rClose").focus();
+  $("reader").classList.add("open");document.body.style.overflow="hidden";$("wrap").inert=true;$("rClose").focus();
+  try{history.pushState({reader:1},"")}catch(e){}
 }
-function closeReader(){
-  $("reader").classList.remove("open");document.body.style.overflow="";
+function closeReader(fromPop){
+  if(!isOpen())return;
+  $("reader").classList.remove("open");document.body.style.overflow="";$("wrap").inert=false;
+  if(!fromPop){try{if(history.state&&history.state.reader)history.back()}catch(e){}}
   if(opener&&opener.isConnected)opener.focus();
 }
 function go(d){if(list[idx+d]){idx+=d;fill()}}
@@ -178,7 +189,8 @@ function isOpen(){return $("reader").classList.contains("open")}
 $("chips").onclick=function(e){var b=e.target.closest(".chip");if(b){cat=b.getAttribute("data-c");render()}};
 $("q").oninput=render;
 $("list").onclick=function(e){var b=e.target.closest(".row");if(b)openReader(shown,+b.getAttribute("data-i"),b)};
-$("rClose").onclick=closeReader;
+$("rClose").onclick=function(){closeReader()};
+window.addEventListener("popstate",function(){if(isOpen())closeReader(true)});
 $("rPrev").onclick=function(){go(-1)};
 $("rNext").onclick=function(){go(1)};
 $("fMin").onclick=function(){if(size>0){size--;applySize()}};
@@ -190,6 +202,7 @@ document.addEventListener("keydown",function(e){
   else if(e.key==="ArrowRight")go(1);
 });
 
+try{if(history.state&&history.state.reader)history.replaceState(null,"")}catch(e){}
 hero();render();
 })();
 </script>

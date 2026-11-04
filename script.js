@@ -2,7 +2,8 @@
   KUMPULAN PUISI
   Tambah puisi dengan menyalin satu blok { ... } di bawah, lalu ubah isinya.
   - Satu baris kosong di antara bait = jarak antar bait.
-  - Jangan memakai tanda ` (backtick) di dalam isi puisi.
+  - Jangan memakai tanda ` (backtick), ${ , atau \ (garis miring terbalik) di dalam isi puisi,
+    karena akan merusak penulisan dan seluruh puisi gagal tampil.
   - Puisi yang ditulis paling atas akan tampil paling atas.
 */
 window.PUISI = [
