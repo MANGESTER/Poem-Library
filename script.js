@@ -10,7 +10,7 @@ window.PUISI = [
   {
     judul: "Daun yang Pulang",
     penyair: "Penghuni Rumah",
-    kategori: "Alam",
+    kategori: "Romansa",
     isi: `
       Langit menumpahkan jingga
       pada sisa cangkir di meja,
@@ -26,7 +26,7 @@ window.PUISI = [
   {
     judul: "Hujan Pertama",
     penyair: "Penghuni Rumah",
-    kategori: "Alam",
+    kategori: "Romansa",
     isi: `
       Hujan pertama jatuh di genting tua,
       mengetuk pintu tanah yang lama haus.
