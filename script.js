@@ -76,5 +76,38 @@ window.PUISI = [
       Janjiku kau yang terakhir
       Walau kisah ini tak pernah ter tafsir
     `
+  },
+  {
+    judul: " ",
+    penyair: "dk_myemje",
+    kategori: "Romansa",
+    isi: `
+      Sekian ribu penolakan ku dapatkan,
+      tak kunjung juga ucapan...
+      Walau sekadar bisikan tuk menopangku
+
+      Deru kata "maaf" tak lagi menjadi lazimnya,
+      kata yang digunakan sebagai rasa bersalah
+      akan suatu perbuatan, kini diartikanya
+      sebagai penolakan
+
+      Bingkai foto, ku temu dibalik tas favoritmu
+      tawa ku berbahagia, ku kira daku...
+      Terkoyak hati, jatuhlah air luhku
+      Berfotonya kekasih dengan pangeran
+
+      Walau dihiburnya sang kekasih
+      Tak dilihat juga tampang 
+      yang tak menawan
+      Memilihnya sang kekasih
+      kepada sang pangeran...
+
+
+      "Tampang merupakan suatu kekuatan 
+      yang lebih dahsyat dari ilmu pengetahuan"
+
+      Jutaan detik tlah kita lewati,
+      namun maafmu hanya untuk mengakhiri
+    `
   }
 ];
