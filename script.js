@@ -61,10 +61,19 @@ window.PUISI = [
     penyair: "dk_myemje",
     kategori: "Romansa",
     isi: `
-      Kita dipisah sebentang peta,
-      tetapi malam yang sama menutup mata kita.
-      Jika bulan adalah surat,
-      kubaca ia dua kali sebelum tidur.
+      Bahkan diantara kepingan jiwa yang tertera
+      Ku tetap melihat pancaran cahaya,
+      yang kan slalu ku ingat kasihnya
+      Ku peluk nan ku berikan doa akan kehidupanya
+
+      Tatkala cahaya itu hilang akan pengagumnya
+      "Oh Tuhan, bagaimanakah hamba bisa bersama dirinya,
+      daku tak lagi kokoh menahan besitan cahaya yang perlahan menghilang
+
+      Rimbun daun teteskan air
+      Ku jaga slalu kenangan terakhir
+      Janjiku kau yang terakhir
+      Walau kisah ini tak pernah ter tafsir
     `
   }
 ];
