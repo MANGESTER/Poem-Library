@@ -38,7 +38,6 @@ ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .m{color:var(--mute);font-size:.9rem;text-align:right;flex-shrink:0}
 .msg{color:var(--mute);padding:22px 4px;text-align:center}
 
-/* ===== Tampilan baca puisi ===== */
 .reader{position:fixed;inset:0;display:none;flex-direction:column;background:var(--paper);z-index:9;--ps:1.25rem}
 .reader.open{display:flex}
 .rbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--paper)}
@@ -66,7 +65,7 @@ ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 <body>
 <div class="wrap" id="wrap">
   <h1><svg class="bloom" viewBox="0 0 48 48" aria-hidden="true"><g stroke="#9c5a30" stroke-width="1.2" stroke-linecap="round"><g transform="rotate(-34 24 44)"><path d="M24 5C36 15 39 27 24 44 9 27 12 15 24 5Z" fill="#d4623a"/><path d="M24 44V14" fill="none"/></g><g transform="rotate(34 24 44)"><path d="M24 5C36 15 39 27 24 44 9 27 12 15 24 5Z" fill="#eab543"/><path d="M24 44V14" fill="none"/></g><g><path d="M24 4C36 14 40 27 24 45 8 27 12 14 24 4Z" fill="#e48a2f"/><path d="M24 45V13" fill="none"/></g></g></svg>Rumah Puisi</h1>
-  <p class="sub">Kumpulan puisi untuk dibaca pelan-pelan, seperti menikmati secangkir teh hangat di sore musim gugur.</p>
+  <p class="sub">Kumpulan sebuah kata untuk dibaca pelan, seksama, hingga dirimu paham akan keindahanya.</p>
   <div class="hero" id="hero" role="button" tabindex="0" hidden>
     <small>Puisi hari ini</small>
     <h2 id="hT"></h2><div id="hA" class="m"></div>
@@ -107,7 +106,6 @@ ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 var $=function(i){return document.getElementById(i)};
 function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}
 
-/* Rapikan isi puisi: hapus spasi indentasi bersama, baris kosong di awal/akhir */
 function tidy(t){
   var lines=String(t).replace(/\r\n?/g,"\n").replace(/\t/g,"  ").split("\n");
   var min=Infinity;
@@ -119,7 +117,7 @@ var loadedOk=Array.isArray(window.PUISI);
 var raw=loadedOk?window.PUISI:[];
 var poems=raw.filter(function(p,i){
   var ok=p&&typeof p.judul==="string"&&typeof p.isi==="string"&&p.judul.trim()&&p.isi.trim();
-  if(!ok&&window.console)console.warn("puisi.js: puisi ke-"+(i+1)+" dilewati karena judul atau isi tidak valid.");
+  if(!ok&&window.console)console.warn("script.js: puisi ke-"+(i+1)+" dilewati karena judul atau isi tidak valid.");
   return ok;
 })
   .map(function(p,i){return {id:i,title:p.judul.trim(),author:String(p.penyair||"").trim(),category:String(p.kategori||"").trim(),text:tidy(p.isi)}});
