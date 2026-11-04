@@ -78,7 +78,7 @@ window.PUISI = [
     `
   },
   {
-    judul: " ",
+    judul: "Sadarku",
     penyair: "dk_myemje",
     kategori: "Romansa",
     isi: `
