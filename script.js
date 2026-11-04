@@ -55,5 +55,16 @@ window.PUISI = [
       Jika bulan adalah surat,
       kubaca ia dua kali sebelum tidur.
     `
+  },
+  {
+    judul: "Yang Kedua",
+    penyair: "dk_myemje",
+    kategori: "Romansa",
+    isi: `
+      Kita dipisah sebentang peta,
+      tetapi malam yang sama menutup mata kita.
+      Jika bulan adalah surat,
+      kubaca ia dua kali sebelum tidur.
+    `
   }
 ];
