@@ -66,9 +66,10 @@ window.PUISI = [
       yang kan slalu ku ingat kasihnya
       Ku peluk nan ku berikan doa akan kehidupanya
 
-      Tatkala cahaya itu hilang akan pengagumnya
+      Tatkala cahaya itu hilang akan pengagumnya,
       "Oh Tuhan, bagaimanakah hamba bisa bersama dirinya,
-      daku tak lagi kokoh menahan besitan cahaya yang perlahan menghilang
+      daku tak lagi kokoh menahan besitan cahaya 
+      yang perlahan hilang kasihnya
 
       Rimbun daun teteskan air
       Ku jaga slalu kenangan terakhir
