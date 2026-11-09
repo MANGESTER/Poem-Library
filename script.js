@@ -109,5 +109,28 @@ window.PUISI = [
       Jutaan detik tlah kita lewati,
       namun maafmu hanya untuk mengakhiri
     `
+  },
+  {
+    judul: "Sajak Jiwa",
+    penyair: "dk_myemje",
+    kategori: "Romansa, Rindu",
+    isi: `
+      Di mataku...
+      Kau bagaikan puisi
+      Yang tak kan pernah mati
+
+      Kau selalu hidup dan berdegup
+      Dalam sajak-sajak...
+      Yang tabah menanti-kau kembali
+
+      Terakhir kita bersua...
+      Binar tatapmu membekas
+      Pada relung jiwa
+
+      Menanti kau kemari
+      Walau sangat ku pahami
+      Kau takkan pernah kembali
+      Wahai sajak jiwa ini
+    `
   }
 ];
