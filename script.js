@@ -114,7 +114,6 @@ window.PUISI = [
     judul: "Sajak Jiwa",
     penyair: "dk_myemje",
     kategori: "Romansa",
-    kategori: 'Rindu',
     isi: `
       Di mataku...
       Kau bagaikan puisi
